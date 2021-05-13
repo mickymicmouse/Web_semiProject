@@ -1,0 +1,17 @@
+package com.spring.crazy.model;
+
+import java.sql.Date;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CrazyMember {
+	
+	private int seq;
+	private String userid;
+	private String userpw;
+	private String username;
+	private String status;
+	private String email;
+	private Date regdate;
+}

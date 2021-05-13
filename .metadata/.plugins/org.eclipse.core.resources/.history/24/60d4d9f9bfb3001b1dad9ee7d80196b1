@@ -1,0 +1,7 @@
+package com.spring.crazy.model;
+
+
+@Component
+public class CrazyMember {
+
+}

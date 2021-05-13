@@ -1,0 +1,7 @@
+select * from CRAZYMEMBER;
+
+delete from CRAZYMEMBER where userid='test';
+
+crazy_seq
+
+insert into crazymember(seq, userid, userpw, username, email, regdate, status) values(crazy_seq.nextval, 'test','1234','Å×½ºÆ®','test@naver.com','','1')

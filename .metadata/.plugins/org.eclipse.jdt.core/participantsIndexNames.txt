@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+C:\dev\semi_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3706008891.index
+\crazy\src\main\java
+C:\dev\semi_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\862750801.index
+\crazyxxxx\src\main\java
+C:\dev\semi_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\41437328.index
+\crazy\src\main\java

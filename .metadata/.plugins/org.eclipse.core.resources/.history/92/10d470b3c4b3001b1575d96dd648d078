@@ -1,0 +1,14 @@
+package com.spring.crazy.daoimpl;
+
+import com.spring.crazy.dao.CrazyLoginDAO;
+import com.spring.crazy.model.CrazyMemberVO;
+
+public class CrazyLoginDAOImpl implements CrazyLoginDAO {
+
+	@Override
+	public String loginpros(CrazyMemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
