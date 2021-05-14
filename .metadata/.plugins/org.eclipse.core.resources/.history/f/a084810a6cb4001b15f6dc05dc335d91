@@ -1,0 +1,16 @@
+package com.spring.crazy.serviceImpl;
+
+import java.util.List;
+
+import com.spring.crazy.model.CrazyBoardVO;
+import com.spring.crazy.service.CrazyBoardService;
+
+public class CrazyBoardServiceImpl implements CrazyBoardService {
+
+	@Override
+	public List<CrazyBoardVO> crazyList() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

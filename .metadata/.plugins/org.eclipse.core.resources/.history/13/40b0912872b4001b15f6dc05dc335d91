@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace = "crazy">
+	<select id="logincheck" resultType="String" parameterType="crazymemberVO">
+	select status from crazymember where userid=#{userid} and userpw = #{userpw}
+	</select>
+	
+	<!-- Dao impl의 ID와 맞춰주기  -->
+	<select id="crazyList" resultType="CrazyBoardVO">
+	select * from crazyboard order by bno desc
+	</select>
+	</mapper>

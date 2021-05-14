@@ -1,0 +1,10 @@
+package com.spring.crazy.dao;
+
+import java.util.List;
+
+import com.spring.crazy.model.CrazyBoardVO;
+
+public interface CrazyBoardDAO {
+
+	public List<CrazyBoardVO> crazyList() throws Exception;
+}

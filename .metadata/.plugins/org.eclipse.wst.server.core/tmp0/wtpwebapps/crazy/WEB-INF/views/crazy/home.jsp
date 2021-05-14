@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
 <title>home</title>
 
 <!-- 부트스트랩 -->
-<meta name = "viewport" content = "width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="<c:url value="/resources/user/css/bootstrap.min.css"/>">
 <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
@@ -19,73 +19,72 @@
 
 <!-- css -->
 <style>
-nav{
-margin:10px;
+nav {
+	margin: 10px;
 }
 
 body {
-	background-color:#FFD9EC;
+	background-color: #FFD9EC;
 }
 
 ul {
-	list-style:none;
-	text-align:center;
-	border-top:2px solid #D9418C;
-	border-bottom:2px solid #D9418C;
-	padding:10px 0;
+	list-style: none;
+	text-align: center;
+	border-top: 2px solid #D9418C;
+	border-bottom: 2px solid #D9418C;
+	padding: 10px 0;
 }
 
 ul li {
-	display:inline;
-	text-transform:uppercase;
-	padding:0 10px;
-	letter-spacing:10px
+	display: inline;
+	text-transform: uppercase;
+	padding: 0 10px;
+	letter-spacing: 10px
 }
 
 ul li a {
-	text-decoration:none;
-	color:#AB195E;
+	text-decoration: none;
+	color: #AB195E;
 }
 
 ul li a:hover {
-	text-decoration:underline;
-	color:white;
+	text-decoration: underline;
+	color: white;
 }
 </style>
 
 </head>
 <body>
-<!-- 로그인, 회원가입, 로그아웃 -->
-<br>
-<div style="text-align:right; color:#D9418C;">
-<c:choose>
-<c:when test="${sessionScope.userid==null}">
-<a style="color:#D9418C" href="login.do">login</a>
-<a style="color:#D9418C" href="join.do">join</a>
-</c:when>
-<c:otherwise>
-<b>${sessionScope.userid} &nbsp;&nbsp;</b>
-<a style="color:#D9418C" href="logout.do">logout</a>
-</c:otherwise>
-</c:choose>
-</div>
+	<!-- 로그인, 회원가입, 로그아웃 -->
+	<br>
+	<div style="text-align: right; color: #D9418C;">
+		<c:choose>
+			<c:when test="${sessionScope.userid==null}">
+				<a style="color: #D9418C" href="login.do">login</a>
+				<a style="color: #D9418C" href="join.do">join</a>
+			</c:when>
+			<c:otherwise>
+				<b>${sessionScope.userid} &nbsp;&nbsp;</b>
+				<a style="color: #D9418C" href="logout.do">logout</a>
+			</c:otherwise>
+		</c:choose>
+	</div>
 
-<!-- 로고 -->
-<header>
-<h1 class="text-center">
-<a href="home.do"><center><img src="<c:url value="/resources/icecream.jpg"/>"></center></a>
-</h1>
-</header>
+	<!-- 로고 -->
+	<header>
+		<h1 class="text-center">
+			<a href="home.do"><center>
+					<img src="<c:url value="/resources/icecream.jpg"/>">
+				</center></a>
+		</h1>
+	</header>
 
-<!-- nav -->
-<nav>
-<ul>
-<li><b><a href="nyongboard.do">게시판</a></b></li>
-<li><b><a href="nyongboard.do">게시판1</a></b></li>
-<li><b><a href="nyongboard.do">게시판2</a></b></li>
-<li><b><a href="nyongboard.do">게시판3</a></b></li>
-</ul>
-</nav>
+	<!-- nav -->
+	<nav>
+		<ul>
+			<li><b><a href="crazyboard.do">게시판</a></b></li>
+		</ul>
+	</nav>
 
 
 </body>

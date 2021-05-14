@@ -28,4 +28,23 @@ public class CrazyLoginServiceImpl implements CrazyLoginService {
 			return status;
 		}
 	}
+
+	@Override
+	public void logout(HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		session.invalidate();
+	}
+
+	@Override
+	public void register(CrazyMemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		dao.register(vo);
+	}
+
+	@Override
+	public int idchk(CrazyMemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		int result = dao.idchk(vo);
+		return result;
+	}
 }

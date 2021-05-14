@@ -1,0 +1,5 @@
+package com.spring.crazy.model;
+
+public class BoardPager {
+
+}

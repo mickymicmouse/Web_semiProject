@@ -1,0 +1,47 @@
+# 유저 테이블 
+
+drop table crazymember;
+
+select * from CRAZYMEMBER;
+
+delete from CRAZYMEMBER where userid='test';
+
+crazy_seq
+
+create table crazymember(
+	seq number not null,
+	userid varchar2(50) not null primary key,
+	userpw varchar2(50) not null,
+	username varchar2(12) not null,
+	email varchar2(50) not null,
+	regdate date default sysdate,
+	status varchar2(6)
+)
+
+create sequence crazy_seq
+start with 1 increment by 1
+maxvalue 99999 nocycle;
+
+insert into crazymember(seq, userid, userpw, username, email, regdate, status) values(crazy_seq.nextval, 'test','1234','테스트','test@naver.com','','1');
+
+
+# 게시판 테이블
+
+create table crazyboard(
+bno number not null primary key,
+writer varchar2(50) not null,
+subject varchar2(100) not null,
+content varchar2(500),
+regdate date default sysdate,
+viewcnt number
+);
+
+create sequence crazy_board
+start with 1 increment by 1
+maxvalue 99999 nocycle;
+
+insert into crazyboard(bno, writer, subject, content) values(board_seq.nextval,'jun', '제목','오늘의 음식은 피자!');
+
+select * from CRAZYBOARD;
+
+

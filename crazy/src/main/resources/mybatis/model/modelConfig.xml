@@ -2,8 +2,10 @@
 <!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+<!-- 짧게 하기 위해서 맞춰주는 것 뿐 -->
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.spring.crazy.model.CrazyMemberVO"  alias="crazymemberVO" />
+		<typeAlias type="com.spring.crazy.model.CrazyBoardVO"  alias="crazyBoardVO" />
 	</typeAliases>
 </configuration>
