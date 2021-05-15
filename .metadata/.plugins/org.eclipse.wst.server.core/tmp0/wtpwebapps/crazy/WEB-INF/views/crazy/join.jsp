@@ -77,8 +77,8 @@ ul li a:hover {
 			})
 		}
 	</script>
-
-	<!-- 로그인, 회원가입, 로그아웃 -->
+	
+		<!-- 로그인, 회원가입, 로그아웃 -->
 	<br>
 	<div style="text-align: right; color: #D9418C;">
 		<c:choose>
@@ -92,7 +92,7 @@ ul li a:hover {
 			</c:otherwise>
 		</c:choose>
 	</div>
-
+	
 	<!-- 로고 -->
 	<header>
 		<h1 class="text-center">

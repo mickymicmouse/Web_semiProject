@@ -54,10 +54,10 @@ public class LoginController {
 			System.out.println("로그인 실패");
 			mav.setViewName("login");
 			mav.addObject("msg", "error");
-		//사용자
-		}else if (status.equals("1")){
-			mav.setViewName("home");
 		//관리자
+		}else if (status.equals("admin")){
+			mav.setViewName("home");
+		//사용자
 		} else {
 			mav.setViewName("home");
 		}

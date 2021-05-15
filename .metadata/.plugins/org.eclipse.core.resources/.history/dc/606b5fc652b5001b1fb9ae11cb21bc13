@@ -1,0 +1,277 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글쓰기</title>
+
+<style>
+.select_img img {
+	margin: 20px 0;
+}
+</style>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-175462567-1"></script>
+<script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-175462567-1');
+        </script>
+</head>
+<body>
+	<%@ include file="home.jsp"%>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+
+			<form action="crazywriteaction.do" style="color: #D9418C;"
+				method="post" enctype="multipart/form-data">
+				<table class="table table-striped"
+					style="border: 2px solid #FFFFFF; text-align: center; background-color: white;">
+					<thead>
+						<tr>
+							<th colspan="2"
+								style="background-color: #eeeeee; text-align: center;">글쓰기</th>
+						</tr>
+					</thead>
+					<tr>
+						<td><input type="text" placeholder="subject" id="subject"
+							name="subject" class="form-control"></td>
+					</tr>
+					<tr>
+						<td><textarea rows="10" class="form-control"
+								placeholder="content" id="content" name="content"></textarea></td>
+					</tr>
+					<tr></tr>
+
+					<tr>
+						<td><input type="button"
+							class="btn btn-default btn-xs pull-right" id="add" name="add"
+							value=" 파일삭제" class="form-control" onclick="delbtn();"></td>
+					</tr>
+
+
+					<tr>
+						<td><div class="inputArea">
+								<label for="imagePreview">이미지</label> <input type="file"
+									id="imageUpload" name="file" style="display: none;">
+								<div>
+									<img id="imagePreview"
+										style="height: 300px; border-radius: 20px; margin: 20px;" />
+								</div>
+								<button type="button" class="btn btn-success"
+									onclick="imageUpload.click()" style="margin: 20px">이미지
+									업로드</button>
+								<button type="button" class="btn btn-success" id="delbutton"
+									style="display: none">이미지 삭제</button>
+							</div></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="card" style="margin: 30px;">
+								<div id="label-container"></div>
+							</div>
+
+						</td>
+					</tr>
+
+					<tr>
+						<td><textarea rows="2" class="form-control"
+								placeholder="description" id="description" name="description"
+								style="display: none;"></textarea></td>
+					</tr>
+
+					<tr>
+						<td colspan="2"><input type="submit" id="change"
+							style="background-color: #D9418C; color: white;"
+							class="btn btn-default pull-right" value="등록" /> <input
+							type="button" style="background-color: #D9418C; color: white;"
+							class="btn btn-default pull-right"
+							onclick="javascript:location.href='crazyboard.do'" value="글목록" />
+						</td>
+					</tr>
+
+				</table>
+
+			</form>
+		</div>
+	</div>
+
+
+
+
+	<c:if test="${msg=='error'}">
+		<script type="text/javascript">
+			alert("내용을 입력하세요");
+		</script>
+	</c:if>
+
+
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous"
+		src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v8.0"
+		nonce="HFQk7fNn"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+
+
+
+	<div class="fb-comments" data-href="https://bokyeong-kim.github.io/"
+		data-numposts="5" data-width=""></div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+
+
+	<script type="text/javascript">
+            const URL = '/crazy/resources/my_model/';
+		
+            let model, webcam, labelContainer, maxPredictions;
+
+            var labeling = {
+                공기밥: { kcal: 310, comment: '= 런닝머신 31분 하기' },
+                치킨: { kcal: 1800, comment: '= 스쿼트 267분 하기' },
+                떡볶이: { kcal: 1000, comment: '= 등산 130분 하기' },
+                삼계탕: { kcal: 918, comment: '= 윗몸일으키기 119분 하기' },
+                맥주: { kcal: 240, comment: '= 계단 36분 걷기' },
+                바나나: { kcal: 88.7, comment: '= 1개 먹을때마다 37분 요가하기' },
+                김밥: { kcal: 446, comment: '= 51분동안 수영하기' },
+            };
+
+			
+            var randomtxt = ['먹어봤자 내가 아는 그맛이다'
+                                , '뚱뚱하면 굶어서라도 빼야한다.'
+                                , '인생은 살이 쪘을 때와 안 쪘을 때로 나뉜다.'
+                                , '세 끼 다먹으면 살쪄요'
+                                , '처먹지를 말던가 살쪘다고 징징대지를 말던가'
+                                , '그 몸무게가 사람이냐? -강천성(짐승)']
+
+            
+            async function init() {
+                const modelURL = URL + 'model.json';
+                const metadataURL = URL + 'metadata.json';
+
+                console.log(modelURL);
+                console.log(metadataURL);
+                model = await tmImage.load(modelURL, metadataURL);
+                console.log(model);
+                maxPredictions = model.getTotalClasses();
+
+			}
+            
+            async function predict() {
+            	
+            	console.log('predict');
+                var image = document.getElementById('imagePreview');
+                console.log(image);
+                const prediction = await model.predict(image, false);
+                
+				var maxProb = 0;
+				var bestClassName;
+				var randomLen = randomtxt.length;
+				var randomContent = Math.round(Math.random()*(randomLen-1));
+				
+				
+                for (let i = 0; i < maxPredictions; i++) {
+					if(prediction[i].probability > maxProb) {
+						
+					   maxProb = prediction[i].probability.toFixed(2)*100;
+					   bestClassName = prediction[i].className;
+
+					   var labelObj = labeling[bestClassName];
+
+                }
+            }
+                if (labelObj==null){
+            		console.log('음식 없음');
+            		document.getElementById('label-container').innerHTML = "";
+                	document.getElementById('description').value = "";
+                }else{
+                	console.log(labelObj);
+    				console.log(bestClassName);
+                    document.getElementById('label-container').innerHTML = bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
+                	document.getElementById('description').value = bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
+                }
+            }
+        </script>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').attr('src', e.target.result);
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(250);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                    init().then(() => {
+                        predict();
+                    });
+                }
+            }
+            
+            function showbutton(){
+            	
+           		$('#delbutton').removeAttr('style');
+           		$('#delbutton').attr('style', 'margin: 20px' )
+            }
+            function deleteimage(){
+            	var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', '/crazy/resources/images/none.png');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(250);
+                };
+                reader.readAsDataURL('/crazy/resources/images/none.png');
+            }
+           		
+            
+            function checkSubject(){
+            	var subject = $('#subject').text();
+            	if (subject==''){
+            		alert('제목을 입력하세요');
+            	}
+            }
+            
+            
+            $('#imageUpload').change(function () {
+                readURL(this);
+                showbutton();
+            });
+            
+            $('#delbutton').click(function () {
+            	alert('삭제');
+            	deleteimage();
+            });
+            
+            $('#change').click(function() {
+            	checkSubject();
+            	
+            });
+        </script>
+
+
+
+</body>
+</html>
