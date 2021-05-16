@@ -86,14 +86,36 @@
 								<th>음식</th>
 								<td><div class="inputArea">
 										<input type="file" id="imageUpload" name="file"
-											style="display: none";> <img
-											src="${pageContext.request.contextPath}/${bno.thumbimg}"
-											class="oriImg" id="imagePreview" />
+											style="display: none";>
+
+										<c:choose>
+											<c:when test="${bno.description eq null}">
+												<img
+													src="${pageContext.request.contextPath}/${bno.thumbimg}"
+													class="oriImg" id="imagePreview" style="display: none;" />
+											</c:when>
+											<c:otherwise>
+												<img
+													src="${pageContext.request.contextPath}/${bno.thumbimg}"
+													class="oriImg" id="imagePreview" />
+											</c:otherwise>
+										</c:choose>
+
 										<button type="button" class="btn btn-success"
 											onclick="imageUpload.click()" style="margin: 20px">이미지
 											업로드</button>
-										<button type="button" class="btn btn-success"
-											onclick="delimg()" id="delbutton">이미지 삭제</button>
+
+										<c:choose>
+											<c:when test="${bno.description eq null }">
+												<button type="button" class="btn btn-success"
+													onclick="delimg()" id="delbutton" style="display: none;">이미지
+													삭제</button>
+											</c:when>
+											<c:otherwise>
+												<button type="button" class="btn btn-success"
+													id="delbutton">이미지 삭제</button>
+											</c:otherwise>
+										</c:choose>
 									</div></td>
 							</tr>
 
@@ -140,8 +162,20 @@
 							<tr>
 								<th>음식</th>
 								<td><div class="inputArea">
-										<img src="${pageContext.request.contextPath}/${bno.thumbimg}"
-											class="oriImg" id="imagePreview" />
+
+
+										<c:choose>
+											<c:when test="${bno.description eq null}">
+												<img
+													src="${pageContext.request.contextPath}/${bno.thumbimg}"
+													class="oriImg" id="imagePreview" style="display: none;" />
+											</c:when>
+											<c:otherwise>
+												<img
+													src="${pageContext.request.contextPath}/${bno.thumbimg}"
+													class="oriImg" id="imagePreview" />
+											</c:otherwise>
+										</c:choose>
 									</div></td>
 							</tr>
 							<tr>
@@ -351,8 +385,8 @@ function delimg(){
                 }else{
                 	console.log(labelObj);
     				console.log(bestClassName);
-                    document.getElementById('label-container').innerHTML = bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
-                	document.getElementById('description').value = bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
+                    document.getElementById('label-container').innerHTML = '<h3>AI 분석결과</h3>'+'<br>'+bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
+                	document.getElementById('description').value = '<h3>AI 분석결과</h3>'+'<br>'+bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
                 }
             }
         </script>
@@ -366,6 +400,9 @@ function delimg(){
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
+                    	
+                    	$('#imagePreview').removeAttr('style');
+                    	$('#imagePreview').attr('style', 'height: 300px; border-radius: 20px; margin: 20px');
                         $('#imagePreview').attr('src', e.target.result);
                         $('#imagePreview').hide();
                         $('#imagePreview').fadeIn(250);
@@ -395,14 +432,17 @@ function delimg(){
             	$('#imagePreview').attr('style','display:none');
             	document.getElementById('label-container').innerHTML = "";
             	document.getElementById('description').value = "";
+            	$('#imageUpload').val("");
             	removebutton();
             }
            		
             
             function checkSubject(){
-            	var subject = $('#subject').text();
-            	if (subject.equals('')){
-            		alert('제목을 입력하세요');
+            	var subject = $('#subject').val();
+            	if (subject==''){
+            		alert('제목을 입력하세요.');
+            	} else{
+            		alert('수정되었습니다.');
             	}
             }
             
@@ -418,6 +458,7 @@ function delimg(){
             
             $('#change').click(function() {
             	checkSubject();
+            	
             	
             });
         </script>

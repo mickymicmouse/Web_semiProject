@@ -52,10 +52,13 @@
 					<tr></tr>
 					<tr>
 						<td><div class="inputArea">
-								<label for="imagePreview">이미지</label> <input type="file"
-									id="imageUpload" name="file" style="display: none;">
+								<label for="imagePreview">이미지</label>
+								<div id="divimageid">
+									<input type="file" id="imageUpload" name="file"
+										style="display:none;">
+								</div>
 								<div>
-									<img id="imagePreview"/>
+									<img id="imagePreview" />
 								</div>
 								<button type="button" class="btn btn-success"
 									onclick="imageUpload.click()" style="margin: 20px">이미지
@@ -272,8 +275,8 @@
                 }else{
                 	console.log(labelObj);
     				console.log(bestClassName);
-                    document.getElementById('label-container').innerHTML = bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
-                	document.getElementById('description').value = bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
+                    document.getElementById('label-container').innerHTML = '<h3>AI 분석결과</h3>'+'<br>'+bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
+                	document.getElementById('description').value = '<h3>AI 분석결과</h3>'+'<br>'+bestClassName + ' : ' +labelObj.kcal +'kcal' +'<br>' + labelObj.comment + '<br><br><b>' + randomtxt[randomContent]  + '</b>';
                 }
             }
         </script>
@@ -284,7 +287,9 @@
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
+                    console.log($('#imageUpload').val());
                     reader.onload = function (e) {
+                    	$('#imagePreview').removeAttr('src');
                     	$('#imagePreview').removeAttr('style');
                     	$('#imagePreview').attr('style', 'height: 300px; border-radius: 20px; margin: 20px');
                         $('#imagePreview').attr('src', e.target.result);
@@ -292,6 +297,7 @@
                         $('#imagePreview').fadeIn(250);
                     };
                     reader.readAsDataURL(input.files[0]);
+                    
                     init().then(() => {
                         predict();
                     });
@@ -310,32 +316,40 @@
             }
             
             function deleteimage(){
+            	console.log($('#imageUpload').val());
             	$('#imagePreview').removeAttr('src');
+            	$('#imagePreview').removeAttr('style');
             	$('#imagePreview').attr('src','/crazy/resources/images/none.png');
             	$('#imagePreview').attr('style','display:none');
             	document.getElementById('label-container').innerHTML = "";
             	document.getElementById('description').value = "";
+            	$('#imageUpload').val("");
+            	
             	removebutton();
             }
-           		
+           	
             
             function checkSubject(){
-            	var subject = $('#subject').text();
-            	if (subject.equals('')){
+            	var subject = $('#subject').val();
+            	if (subject==''){
             		alert('제목을 입력하세요');
+            	}else{
+            		alert('등록되었습니다');
             	}
             }
             
-            
             $('#imageUpload').change(function () {
+
                 readURL(this);
                 showbutton();
             });
             
+            
             $('#delbutton').click(function () {
-            	
-            	deleteimage();
             	alert('삭제되었습니다.');
+            	deleteimage();
+            	
+            	
             });
             
             $('#change').click(function() {
